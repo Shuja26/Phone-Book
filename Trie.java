@@ -114,9 +114,9 @@ public class Trie {
 				al.add(soFar);
 			}
 		}
-		for(int i = 0; i < 58; i++) {
+		for(int i = 0; i < 91; i++) {
 			if(ptr.links[i] != null) {
-				contactsWithPrefixHelper(al, soFar + Character.toString('A'+i), ptr.links[i]);
+				contactsWithPrefixHelper(al, soFar + Character.toString(' '+i), ptr.links[i]);
 			}
 		}
 		return;
@@ -124,12 +124,29 @@ public class Trie {
 	
 	// Print all contact names
 	static void displayAllContacts() {
-		System.out.println(contactsWithPrefix(""));
+		ArrayList<String> al = contactsWithPrefix("");
+		if(al.size() == 0) {
+			System.out.println("No contacts exist");
+			return;
+		}
+		System.out.println("Your contacts:");
+		for(int i = 0; i < al.size(); i++) {
+			System.out.println(al.get(i));
+		}
 	}
 	
-	//Getting all numbers under an existing name
+	// Getting all numbers under an existing name
 	static ArrayList<Integer> getNumbers(String name) {
 		return storage.get(name);
+	}
+
+	// Remove entry of contact from storage
+	public static void delName(String name, int no) {
+		if(no == 0) {
+			storage.remove(name);
+			return;
+		}
+		storage.get(name).remove(no-1);
 	}
 }
 	

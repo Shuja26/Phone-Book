@@ -1,7 +1,7 @@
 package Contacts;
 
 public class Node {
-	Node links[] = new Node[58];
+	Node links[] = new Node[91];
 	int noOfEnd = 0;
 	int noOfPrefix = 0;
 	
@@ -10,14 +10,14 @@ public class Node {
 	}
 	
 	boolean containsChar(char alphabet) {
-		return (this.links[alphabet-'A'] != null);
+		return (this.links[alphabet-' '] != null);
 	}
 	Node get(char alphabet) {
-		return links[alphabet-'A'];
+		return links[alphabet-' '];
 	}
 	
 	void put(char alphabet, Node node) {
-		links[alphabet-'A'] = node;
+		links[alphabet-' '] = node;
 	}
 	
 	void endsHere() {
