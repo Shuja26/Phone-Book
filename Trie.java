@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Trie {
 	private static Node root;
-	private static HashMap<String,ArrayList<Integer>> storage;
+	private static HashMap<String,ArrayList<Long>> storage;
 	// Creating root node to initialize Trie 
 	public Trie() {
 		this.root = new Node();
@@ -13,7 +13,7 @@ public class Trie {
 	}
 	
 	// Inserting contact in our Phone Book
-	public static void insertContact(String contact, int number) {
+	public static void insertContact(String contact, long number) {
 		Node pointer = root;
 		for(int i = 0; i < contact.length(); i++) {
 			if(!pointer.containsChar(contact.charAt(i))) {
@@ -24,12 +24,12 @@ public class Trie {
 		}
 		pointer.endsHere();
 		if(!storage.containsKey(contact)) {
-			ArrayList<Integer> al = new ArrayList<>();
+			ArrayList<Long> al = new ArrayList<>();
 			al.add(number);
 			storage.put(contact, al);
 		}
 		else {
-			ArrayList<Integer> al = storage.get(contact);
+			ArrayList<Long> al = storage.get(contact);
 			al.add(number);
 		}
 	}
@@ -136,7 +136,7 @@ public class Trie {
 	}
 	
 	// Getting all numbers under an existing name
-	static ArrayList<Integer> getNumbers(String name) {
+	static ArrayList<Long> getNumbers(String name) {
 		return storage.get(name);
 	}
 

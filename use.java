@@ -4,8 +4,11 @@ import java.util.*;
 
 public class use {
 	public static void main(String args[]) {
-		//Add contacts
 		Trie phoneBook = new Trie();
+		//Adding 200 random contacts
+		for(int i = 0; i < 150; i++) {
+			addRandomContacts(phoneBook, 1, 30);
+		}
 		Scanner sc = new Scanner(System.in);
 		boolean Exit = false;
 		String name = "";
@@ -29,7 +32,7 @@ public class use {
 				name = sc.nextLine();
 				name = sc.nextLine();
 				System.out.println("Enter contact number:");
-				int number = sc.nextInt();
+				long number = sc.nextLong();
 				phoneBook.insertContact(name, number);
 				System.out.println("Contact entered in Phone Book");
 				System.out.println();
@@ -40,7 +43,7 @@ public class use {
 				name = sc.nextLine();
 				if(phoneBook.searchFor(name)) {
 					System.out.println("Conatact '" + name + "' exists in your phone book and has the following number(s)");
-					ArrayList<Integer> al = phoneBook.getNumbers(name);
+					ArrayList<Long> al = phoneBook.getNumbers(name);
 					int n = al.size();
 					for(int i = 0; i < n; i++) {
 						System.out.println(al.get(i));
@@ -78,7 +81,7 @@ public class use {
 					break;
 				}
 				System.out.println("The numbers under the name " + name + " are:");
-				ArrayList<Integer> al = phoneBook.getNumbers(name);
+				ArrayList<Long> al = phoneBook.getNumbers(name);
 				for(int i = 0; i < al.size(); i++) {
 					System.out.println((i+1) + " " + al.get(i));
 				}
@@ -110,7 +113,7 @@ public class use {
 				name = sc.nextLine();
 				name = sc.nextLine();
 				if(phoneBook.searchFor(name)) {
-					ArrayList<Integer> al11 = phoneBook.getNumbers(name);
+					ArrayList<Long> al11 = phoneBook.getNumbers(name);
 					System.out.println("The numbers under name: " + name + " are:");
 					for(int i = 0; i < al11.size(); i++) {
 						System.out.println(al11.get(i));
@@ -125,5 +128,27 @@ public class use {
 				break;
 			}
 		}
+	}
+	
+	// Function to add random contacts
+	static void addRandomContacts(Trie phoneBook, int min, int max) {
+		int n = (int) ((Math.random() * (max - min)) + min);
+		String AlphaNumericString = " ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
+
+		// create StringBuffer size of AlphaNumericString
+		StringBuilder sb = new StringBuilder(n);
+
+		for (int i = 0; i < n; i++) {
+
+			// generate a random number between
+			// 0 to AlphaNumericString variable length
+			int index = (int)(AlphaNumericString.length()* Math.random());
+			// add Character one by one in end of sb
+			sb.append(AlphaNumericString.charAt(index));
+		}
+		long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+		phoneBook.insertContact(sb.toString(), number);
 	}
 }
